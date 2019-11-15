@@ -31,16 +31,10 @@ import com.example.android.trackmysleepquality.convertNumericQualityToString
 import com.example.android.trackmysleepquality.database.SleepNight
 
 class SleepNightAdapter : ListAdapter<SleepNight, SleepNightAdapter.ViewHolder>(SleepNightDiffCallback()) {
-    var data = listOf<SleepNight>()
-        set(value) {
-            field = value
-            notifyDataSetChanged()
-        }
 
-    override fun getItemCount() = data.size
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
-        val item = data[position]
+        val item = getItem(position)
         holder.bind(item)
     }
 
@@ -80,7 +74,7 @@ class SleepNightAdapter : ListAdapter<SleepNight, SleepNightAdapter.ViewHolder>(
     }
 }
 
-class SleepNightDiffCallback : DiffUtil.ItemCallback<SleepNight> {
+class SleepNightDiffCallback : DiffUtil.ItemCallback<SleepNight>() {
     override fun areItemsTheSame(oldItem: SleepNight, newItem: SleepNight): Boolean {
         return oldItem.nightId == newItem.nightId
     }
